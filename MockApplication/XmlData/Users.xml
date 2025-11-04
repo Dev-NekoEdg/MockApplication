@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Users>
+  <User UserId="fa3ae913-892d-471e-9790-c6a73cdf183f">
+    <FirstName>Pedro</FirstName>
+    <LastName>Perez</LastName>
+    <Email>pedro-perez@testmail.com</Email>
+    <IdentificationType>1</IdentificationType>
+    <IdentificationNumber>1203489234</IdentificationNumber>
+    <DateBirth>2000-01-01</DateBirth>
+    <Height>1.8</Height>
+    <Weight>75</Weight>
+    <HasAnyDisabilitys>false</HasAnyDisabilitys>
+  </User>
+</Users>
