@@ -57,20 +57,20 @@ public class UserRepository : IUserRepository
 
     public async Task<User> ReadAsync(string id)
     {
-        var query = from data in xdocument.Descendants("Users")
-                    where data.Attribute("UserId").Value == id.ToString()
+        var query = from data in xdocument.Descendants("User")
+                    where data.Attribute("UserId").Value == id
                     select new User
                     {
                         UserId = data.Attribute("UserId").Value,
-                        FirstName = data.Attribute("Name").Value,
-                        LastName = data.Attribute("LastName").Value,
-                        Email = data.Attribute("Email").Value,
-                        IdentificationType = Convert.ToInt16(data.Attribute("IdentificationType").Value),
-                        IdentificationNumber = data.Attribute("IdentificationNumber").Value,
-                        DateBirth = Convert.ToDateTime(data.Attribute("DateBirth").Value),
-                        Height = Convert.ToDouble(data.Attribute("Height").Value),
-                        Weight = Convert.ToDouble(data.Attribute("Weight").Value),
-                        HasAnyDisabilitys = Convert.ToBoolean(data.Attribute("HasAnyDisabilitys").Value)
+                        FirstName = data.Element("FirstName").Value,
+                        LastName = data.Element("LastName").Value,
+                        Email = data.Element("Email").Value,
+                        IdentificationType = Convert.ToInt16(data.Element("IdentificationType").Value),
+                        IdentificationNumber = data.Element("IdentificationNumber").Value,
+                        DateBirth = Convert.ToDateTime(data.Element("DateBirth").Value),
+                        Height = Convert.ToDouble(data.Element("Height").Value),
+                        Weight = Convert.ToDouble(data.Element("Weight").Value),
+                        HasAnyDisabilitys = Convert.ToBoolean(data.Element("HasAnyDisabilitys").Value)
                     };
 
         return query.FirstOrDefault();
@@ -78,19 +78,19 @@ public class UserRepository : IUserRepository
 
     public async Task<IList<User>> ReadAllAsync()
     {
-        var query = from data in xdocument.Descendants("Users")
+        var query = from data in xdocument.Descendants("User")
                     select new User
                     {
                         UserId = data.Attribute("UserId").Value,
-                        FirstName = data.Attribute("FirstName").Value,
-                        LastName = data.Attribute("LastName").Value,
-                        Email = data.Attribute("Email").Value,
-                        IdentificationType = Convert.ToInt16(data.Attribute("IdentificationType").Value),
-                        IdentificationNumber = data.Attribute("IdentificationNumber").Value,
-                        DateBirth = Convert.ToDateTime(data.Attribute("DateBirth").Value),
-                        Height = Convert.ToDouble(data.Attribute("Height").Value),
-                        Weight = Convert.ToDouble(data.Attribute("Weight").Value),
-                        HasAnyDisabilitys = Convert.ToBoolean(data.Attribute("HasAnyDisabilitys").Value)
+                        FirstName = data.Element("FirstName").Value,
+                        LastName = data.Element("LastName").Value,
+                        Email = data.Element("Email").Value,
+                        IdentificationType = Convert.ToInt32(data.Element("IdentificationType").Value),
+                        IdentificationNumber = data.Element("IdentificationNumber").Value,
+                        DateBirth = Convert.ToDateTime(data.Element("DateBirth").Value),
+                        Height = Convert.ToDouble(data.Element("Height").Value),
+                        Weight = Convert.ToDouble(data.Element("Weight").Value),
+                        HasAnyDisabilitys = Convert.ToBoolean(data.Element("HasAnyDisabilitys").Value)
                     };
 
         return query.ToList();
@@ -100,15 +100,15 @@ public class UserRepository : IUserRepository
     {
         XElement xElement = GetXElement(dto.UserId);
 
-        xElement.Attribute("FirstName").Value = dto.FirstName;
-        xElement.Attribute("LastName").Value = dto.LastName;
-        xElement.Attribute("Email").Value = dto.Email;
-        xElement.Attribute("IdentificationType").Value = dto.IdentificationType.ToString();
-        xElement.Attribute("IdentificationNumber").Value = dto.IdentificationNumber;
-        xElement.Attribute("DateBirth").Value = dto.DateBirth.ToShortDateString();
-        xElement.Attribute("Height").Value = dto.Height.ToString();
-        xElement.Attribute("Weight").Value = dto.Weight.ToString();
-        xElement.Attribute("HasAnyDisabilitys").Value = dto.HasAnyDisabilitys.ToString();
+        xElement.Element("FirstName").Value = dto.FirstName;
+        xElement.Element("LastName").Value = dto.LastName;
+        xElement.Element("Email").Value = dto.Email;
+        xElement.Element("IdentificationType").Value = dto.IdentificationType.ToString();
+        xElement.Element("IdentificationNumber").Value = dto.IdentificationNumber;
+        xElement.Element("DateBirth").Value = dto.DateBirth.ToShortDateString();
+        xElement.Element("Height").Value = dto.Height.ToString();
+        xElement.Element("Weight").Value = dto.Weight.ToString();
+        xElement.Element("HasAnyDisabilitys").Value = dto.HasAnyDisabilitys.ToString();
 
         xdocument.Save(path);
 
@@ -117,7 +117,7 @@ public class UserRepository : IUserRepository
 
     private XElement GetXElement(string id)
     {
-        var query = from data in xdocument.Descendants()
+        var query = from data in xdocument.Descendants("User")
                     where data.Attribute("UserId").Value == id
                     select data;
 

@@ -22,4 +22,26 @@
     <Weight>75</Weight>
     <HasAnyDisabilitys>false</HasAnyDisabilitys>
   </User>
+  <User UserId="88c686e9-3a1e-489b-a0dc-32bda98e281d">
+    <FirstName>Pluto</FirstName>
+    <LastName>Miaunster</LastName>
+    <Email>pluto.miaunster@miaumail.com</Email>
+    <IdentificationType>3</IdentificationType>
+    <IdentificationNumber>896745231</IdentificationNumber>
+    <DateBirth>1987-01-01</DateBirth>
+    <Height>1.8</Height>
+    <Weight>75</Weight>
+    <HasAnyDisabilitys>false</HasAnyDisabilitys>
+  </User>
+  <User UserId="e96c1825-12e5-4af5-9a4a-367cab22f404">
+    <FirstName>mario</FirstName>
+    <LastName>lopez</LastName>
+    <Email>mario.lopez@testmail.com</Email>
+    <IdentificationType>1</IdentificationType>
+    <IdentificationNumber>10678945</IdentificationNumber>
+    <DateBirth>1967-09-06</DateBirth>
+    <Height>1.8</Height>
+    <Weight>75</Weight>
+    <HasAnyDisabilitys>False</HasAnyDisabilitys>
+  </User>
 </Users>

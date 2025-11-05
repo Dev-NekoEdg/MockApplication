@@ -23,11 +23,11 @@ namespace MockApplication.Controllers
             return Ok(result);
         }
 
-        [HttpPut("/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(string id, [FromBody] UserModel model)
         {
             model.UserId = id;
-            var result = await service.CreateUserAsync(model);
+            var result = await service.UpdateUserAsync(model);
             return Ok(result);
         }
 
@@ -39,14 +39,14 @@ namespace MockApplication.Controllers
         }
 
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetUserByIdAsync(string id)
         {
             var result = await service.GetUserByIdAsync(id);
             return Ok(result);
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUserByIdAsync(string id)
         {
             var result = await service.DeleteUserAsync(id);
