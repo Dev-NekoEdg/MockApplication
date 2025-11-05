@@ -28,7 +28,7 @@ public class UserRepository : IUserRepository
         xdocument = XDocument.Load(path);
     }
 
-    public async Task<User> Create(User dto)
+    public async Task<User> CreateAsync(User dto)
     {
         XElement xElement = new XElement("User");
         xElement.SetAttributeValue("UserId", dto.UserId);
@@ -47,7 +47,7 @@ public class UserRepository : IUserRepository
         return dto;
     }
 
-    public async Task<bool> Delete(string id)
+    public async Task<bool> DeleteAsync(string id)
     {
         XElement xElement = GetXElement(id.ToString());
         xElement.Remove();
@@ -55,9 +55,9 @@ public class UserRepository : IUserRepository
         return true;
     }
 
-    public async Task<IList<User>> Read(string id)
+    public async Task<User> ReadAsync(string id)
     {
-        var query = from data in xdocument.Descendants("")
+        var query = from data in xdocument.Descendants("Users")
                     where data.Attribute("UserId").Value == id.ToString()
                     select new User
                     {
@@ -73,10 +73,30 @@ public class UserRepository : IUserRepository
                         HasAnyDisabilitys = Convert.ToBoolean(data.Attribute("HasAnyDisabilitys").Value)
                     };
 
+        return query.FirstOrDefault();
+    }
+
+    public async Task<IList<User>> ReadAllAsync()
+    {
+        var query = from data in xdocument.Descendants("Users")
+                    select new User
+                    {
+                        UserId = data.Attribute("UserId").Value,
+                        FirstName = data.Attribute("FirstName").Value,
+                        LastName = data.Attribute("LastName").Value,
+                        Email = data.Attribute("Email").Value,
+                        IdentificationType = Convert.ToInt16(data.Attribute("IdentificationType").Value),
+                        IdentificationNumber = data.Attribute("IdentificationNumber").Value,
+                        DateBirth = Convert.ToDateTime(data.Attribute("DateBirth").Value),
+                        Height = Convert.ToDouble(data.Attribute("Height").Value),
+                        Weight = Convert.ToDouble(data.Attribute("Weight").Value),
+                        HasAnyDisabilitys = Convert.ToBoolean(data.Attribute("HasAnyDisabilitys").Value)
+                    };
+
         return query.ToList();
     }
 
-    public async Task<User> Update(User dto)
+    public async Task<User> UpdateAsync(User dto)
     {
         XElement xElement = GetXElement(dto.UserId);
 
@@ -103,4 +123,5 @@ public class UserRepository : IUserRepository
 
         return query.FirstOrDefault();
     }
+
 }

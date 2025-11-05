@@ -6,7 +6,7 @@ namespace MockApplication.Domain.Converts;
 public static class UserConverts
 {
 
-    public static UserModel ToModel(this Entities.User entity)
+    public static UserModel ToModel(this User entity)
     {
         return new UserModel
         {
@@ -14,7 +14,7 @@ public static class UserConverts
             FirstName = entity.FirstName,
             LastName = entity.LastName,
             Email = entity.Email,
-            IdentificationType = entity.IdentificationType,
+            IdentificationType = ParseEmun(entity.IdentificationType.ToString()),
             IdentificationNumber = entity.IdentificationNumber,
             DateBirth = entity.DateBirth,
             Height = entity.Height,
@@ -31,12 +31,18 @@ public static class UserConverts
             FirstName = entity.FirstName,
             LastName = entity.LastName,
             Email = entity.Email,
-            IdentificationType = entity.IdentificationType,
+            IdentificationType = (int)entity.IdentificationType,
             IdentificationNumber = entity.IdentificationNumber,
             DateBirth = entity.DateBirth,
             Height = entity.Height,
             Weight = entity.Weight,
             HasAnyDisabilitys = entity.HasAnyDisabilitys
         };
+    }
+
+    private static IdentificationType ParseEmun(string value)
+    {
+        var objParced = Enum.Parse(typeof(IdentificationType), value.ToUpper());
+        return (IdentificationType)objParced;
     }
 }

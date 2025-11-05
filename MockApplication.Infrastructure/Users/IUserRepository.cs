@@ -2,9 +2,10 @@
 
 namespace MockApplication.Infrastructure.Users;
 public interface IUserRepository
-    {
-        Task<User> Create(User dto);
-        Task<bool> Delete(string id);
-        Task<IList<User>> Read(string id);
-        Task<User> Update(User dto);
-    }
+{
+    Task<User> CreateAsync(User dto);
+    Task<bool> DeleteAsync(string id);
+    Task<User> ReadAsync(string id);
+    Task<IList<User>> ReadAllAsync();
+    Task<User> UpdateAsync(User dto);
+}

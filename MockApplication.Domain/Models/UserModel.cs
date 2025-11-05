@@ -1,4 +1,7 @@
-﻿namespace MockApplication.Domain.Models;
+﻿using MockApplication.Domain.Entities;
+using System.Text.Json.Serialization;
+
+namespace MockApplication.Domain.Models;
 
 public class UserModel
 {
@@ -6,7 +9,9 @@ public class UserModel
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string Email { get; set; }
-    public int IdentificationType { get; set; }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
+    public IdentificationType IdentificationType { get; set; }
     public string IdentificationNumber { get; set; }
     public DateTime DateBirth { get; set; } = DateTime.UtcNow;
     public double Height { get; set; }

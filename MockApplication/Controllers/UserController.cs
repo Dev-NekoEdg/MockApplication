@@ -23,11 +23,34 @@ namespace MockApplication.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpPut("/{id}")]
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UserModel model)
         {
-            
-            return Ok("UserController is working!");
+            model.UserId = id;
+            var result = await service.CreateUserAsync(model);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var result = await service.GetUsersAsync();
+            return Ok(result);
+        }
+
+
+        [HttpGet("/{id}")]
+        public async Task<IActionResult> GetUserByIdAsync(string id)
+        {
+            var result = await service.GetUserByIdAsync(id);
+            return Ok(result);
+        }
+
+        [HttpDelete("/{id}")]
+        public async Task<IActionResult> DeleteUserByIdAsync(string id)
+        {
+            var result = await service.DeleteUserAsync(id);
+            return Ok(result);
         }
 
     }
